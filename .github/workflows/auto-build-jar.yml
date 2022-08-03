@@ -1,8 +1,6 @@
 name: Build and deploy JAR app to releases
 on:
   push:
-    branches:
-      - "19.1"
   workflow_dispatch:
 
 permissions:
@@ -13,11 +11,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Setup variables
-      id: project
-      shell: bash
-      run: sh ${{ github.action_path }}/setup_variables.sh . 17
-
     - name: Set up JDK
       uses: actions/setup-java@v1
       with:
