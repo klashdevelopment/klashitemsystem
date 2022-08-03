@@ -1,0 +1,13 @@
+name: KlashItemSys
+version: '${project.version}'
+main: com.klashdevelopment.klashnetwork.klashitemsys.KlashItemSys
+api-version: 1.19
+author: "GavinGoGaming"
+depend:
+  - SysomanderAPI
+commands:
+  itemlist:
+permissions:
+  klashitemsys.listcommand:
+    default: op
+    description: "Allows the user to see the list of items"
