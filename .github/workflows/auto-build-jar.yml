@@ -9,6 +9,9 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: .
 
     steps:
     - name: Set up JDK
@@ -20,7 +23,7 @@ jobs:
       id: packaging-jar
       shell: bash
       run: |
-        # COMMAND THAT COMPILES -----
+        cd .
         mvn clean install
         
     - name: Delete existing release and tag
