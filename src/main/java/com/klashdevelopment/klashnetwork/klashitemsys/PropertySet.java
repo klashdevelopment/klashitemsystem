@@ -21,6 +21,8 @@ public class PropertySet {
     public ItemFlag[] flags = new ItemFlag[] {ItemFlag.HIDE_ENCHANTS};
     public boolean cancelClickEvent = false;
     public boolean cancelBreakEvent = false;
+    public ItemRecipe recipe = null;
+    public String id = null;
 
     public FormattedPropertySet format() {
         return new FormattedPropertySet(this);
@@ -58,8 +60,16 @@ public class PropertySet {
             propertySet.defaultAmount = defaultAmount;
             return this;
         }
+        public Builder setId(String id) {
+            propertySet.id = id;
+            return this;
+        }
         public Builder setEnchantments(Enchantment[] enchantments) {
             propertySet.enchantments = enchantments;
+            return this;
+        }
+        public Builder setRecipe(ItemRecipe recipe) {
+            propertySet.recipe = recipe;
             return this;
         }
         public Builder setFlags(ItemFlag[] flags) {

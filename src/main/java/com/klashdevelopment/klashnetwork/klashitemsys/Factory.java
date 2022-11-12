@@ -1,12 +1,13 @@
 package com.klashdevelopment.klashnetwork.klashitemsys;
 
+import com.destroystokyo.paper.Namespaced;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Factory {
     public static ItemStack createItem(Item item) {
@@ -21,6 +22,10 @@ public class Factory {
         }
         stack.addItemFlags(item.getPropertySet().flags);
 
+        Set<Namespaced> keys = meta.getPlaceableKeys();
+        keys.add(LazyNamespaced.ofItemSys(item.getPropertySet().id));
+        meta.setPlaceableKeys(keys);
+
         stack.setItemMeta(meta);
 
         stack = item.modifyBeforeCreation(stack);
@@ -29,23 +34,6 @@ public class Factory {
     }
 
     public static List<Component> presetLore(FormattedPropertySet propertySet) {
-        List<String> befores = new ArrayList<>();
-        List<String> afters = new ArrayList<>();
-        befores.add(propertySet.description);
-        for(Enchantment enchantment : propertySet.enchantments) {
-            befores.add(enchantment.enchantment() + ": L" + enchantment.level());
-        }
-
-        List<String> lore = new ArrayList<>();
-        lore.addAll(befores);
-        if(!propertySet.lore.isEmpty()) {
-            lore.add(" ");
-        }
-        lore.addAll(propertySet.lore);
-        if(!propertySet.lore.isEmpty()) {
-            lore.add(" ");
-        }
-        lore.addAll(afters);
-        return ComponentUtils.fromStringList(lore);
+        return new ArrayList<>(ComponentUtils.textFromStringList(propertySet.getLoreList()));
     }
 }
