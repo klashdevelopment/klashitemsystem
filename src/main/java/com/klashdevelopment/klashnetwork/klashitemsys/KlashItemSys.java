@@ -44,7 +44,7 @@ public final class KlashItemSys extends JavaPlugin implements Listener {
         sys = new Sysomander(this);
         gui = new SpiGUI(this);
 
-        items.add(new TestItem(), "klashitemsys");
+        items.add(new TestItem());
 
         // Add sysomands
         sys.addSysomandToServer(new ItemListCmd());

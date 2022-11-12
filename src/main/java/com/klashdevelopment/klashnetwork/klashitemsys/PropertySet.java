@@ -61,7 +61,7 @@ public class PropertySet {
             return this;
         }
         public Builder setId(String id) {
-            propertySet.id = id;
+            propertySet.id = id.replace(" ", "-");
             return this;
         }
         public Builder setEnchantments(Enchantment[] enchantments) {

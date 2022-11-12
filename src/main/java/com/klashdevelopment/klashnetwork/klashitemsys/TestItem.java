@@ -6,7 +6,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class TestItem implements Item {
     @Override
     public FormattedPropertySet getPropertySet() {
-        return PropertySet.builder().setDescription("This is a test item! Please do not use in production.").build().format();
+        return PropertySet.builder()
+                .setDescription("This is a test item! Please do not use in production.")
+                .setId("builtintestitem")
+                .build().format();
     }
 
     @Override

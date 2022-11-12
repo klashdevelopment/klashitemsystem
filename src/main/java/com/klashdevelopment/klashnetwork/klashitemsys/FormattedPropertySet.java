@@ -17,6 +17,7 @@ public class FormattedPropertySet extends PropertySet {
         this.defaultAmount = ps.defaultAmount;
         this.flags = ps.flags;
         this.recipe = ps.recipe;
+        this.id = ps.id;
         this.cancelClickEvent = ps.cancelClickEvent;
         this.cancelBreakEvent = ps.cancelBreakEvent;
     }

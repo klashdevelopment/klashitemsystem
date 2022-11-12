@@ -22,7 +22,7 @@ public class Factory {
         }
         stack.addItemFlags(item.getPropertySet().flags);
 
-        Set<Namespaced> keys = meta.getPlaceableKeys();
+        ArrayList<Namespaced> keys = new ArrayList<Namespaced>(meta.getPlaceableKeys());
         keys.add(LazyNamespaced.ofItemSys(item.getPropertySet().id));
         meta.setPlaceableKeys(keys);
 
