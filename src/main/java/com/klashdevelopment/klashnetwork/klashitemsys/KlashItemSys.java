@@ -34,6 +34,9 @@ import java.util.List;
 
 public final class KlashItemSys extends JavaPlugin implements Listener {
 
+    void debug(CharSequence sqnc){
+        System.out.println(String.format("[klsh-dbg]:-: %s", sqnc));
+    }
     public ItemList items = new ItemList();
 
     public Sysomander sys;
@@ -58,10 +61,17 @@ public final class KlashItemSys extends JavaPlugin implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent ev) {
         ItemStack stack = ev.getItem();
+//        debug("Click event");
         if (stack == null || stack.getType() == Material.AIR) return;
+//        debug("Click event 2");
         for (Item item : items) {
+//            debug("Passing item " + item.getPropertySet().name + " as PKLL " + stack.getItemMeta().getPlaceableKeys().size());
+            // WHYARE THERE NOTHIN IN THIS LIST
             for (Namespaced v : stack.getItemMeta().getPlaceableKeys()) {
+//                debug("   ->  Passing namespace (n\"" + v.getNamespace() + "\", k\"" + v.getKey() + "\")");
+//                debug("   ->  About to use PropSetId " + item.getPropertySet().id);
                 if (v.getKey().equals(item.getPropertySet().id)) {
+//                    debug("   ->   -> Equals ID");
                     if (item.getPropertySet().cancelClickEvent) {
                         ev.setCancelled(true);
                     }
