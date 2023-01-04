@@ -9,6 +9,6 @@ public interface Item {
     public default ItemStack modifyBeforeCreation(ItemStack stack) {
         return stack;
     }
-    public default void rightClick(PlayerInteractEvent ev) {};
+    public default void itemInteract(PlayerInteractEvent ev) {};
     public default void blockBreak(BlockBreakEvent ev) {};
 }

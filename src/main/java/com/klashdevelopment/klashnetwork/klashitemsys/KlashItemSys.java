@@ -1,7 +1,5 @@
 package com.klashdevelopment.klashnetwork.klashitemsys;
 
-import com.destroystokyo.paper.Namespaced;
-import com.destroystokyo.paper.NamespacedTag;
 import com.klashdevelopment.sysomander.sysomand.Sysomander;
 import com.samjakob.spigui.SpiGUI;
 //import net.dv8tion.jda.api.JDA;
@@ -17,20 +15,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-
-import javax.security.auth.login.LoginException;
-import javax.security.auth.login.LoginException;
-import java.util.ArrayList;
-import java.util.List;
 
 public final class KlashItemSys extends JavaPlugin implements Listener {
 
@@ -61,36 +48,37 @@ public final class KlashItemSys extends JavaPlugin implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent ev) {
         ItemStack stack = ev.getItem();
-//        debug("Click event");
         if (stack == null || stack.getType() == Material.AIR) return;
-//        debug("Click event 2");
         for (Item item : items) {
-//            debug("Passing item " + item.getPropertySet().name + " as PKLL " + stack.getItemMeta().getPlaceableKeys().size());
-            // WHYARE THERE NOTHIN IN THIS LIST
-            for (Namespaced v : stack.getItemMeta().getPlaceableKeys()) {
-//                debug("   ->  Passing namespace (n\"" + v.getNamespace() + "\", k\"" + v.getKey() + "\")");
-//                debug("   ->  About to use PropSetId " + item.getPropertySet().id);
-                if (v.getKey().equals(item.getPropertySet().id)) {
-//                    debug("   ->   -> Equals ID");
-                    if (item.getPropertySet().cancelClickEvent) {
-                        ev.setCancelled(true);
+            if(stack.getType() == item.getPropertySet().material) {
+                if(stack.getItemMeta().hasLore()) {
+                    if(stack.getItemMeta().hasDisplayName()) {
+                        if(ChatColor.stripColor(stack.getItemMeta().getDisplayName()).contains(ChatColor.stripColor(item.getPropertySet().name))) {
+                            if (item.getPropertySet().cancelClickEvent) {
+                                ev.setCancelled(true);
+                            }
+                            item.itemInteract(ev);
+                        }
                     }
-                    item.rightClick(ev);
                 }
             }
         }
     }
     @EventHandler
-    public void onBreak(BlockBreakEvent event) {
-        ItemStack stack = event.getPlayer().getInventory().getItemInMainHand();
-        if(stack.getType() == Material.AIR) return;
-        for(Item item : items) {
-            for(Namespaced v : stack.getItemMeta().getPlaceableKeys()) {
-                if (v.getKey().equals(item.getPropertySet().id)) {
-                    if (item.getPropertySet().cancelBreakEvent) {
-                        event.setCancelled(true);
+    public void onBreak(BlockBreakEvent ev) {
+        ItemStack stack = ev.getPlayer().getInventory().getItemInMainHand();
+        if (stack == null || stack.getType() == Material.AIR) return;
+        for (Item item : items) {
+            if(stack.getType() == item.getPropertySet().material) {
+                if(stack.getItemMeta().hasLore()) {
+                    if(stack.getItemMeta().hasDisplayName()) {
+                        if(ChatColor.stripColor(stack.getItemMeta().getDisplayName()).contains(ChatColor.stripColor(item.getPropertySet().name))) {
+                            if (item.getPropertySet().cancelClickEvent) {
+                                ev.setCancelled(true);
+                            }
+                            item.blockBreak(ev);
+                        }
                     }
-                    item.blockBreak(event);
                 }
             }
         }

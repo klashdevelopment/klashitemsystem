@@ -13,7 +13,7 @@ public class TestItem implements Item {
     }
 
     @Override
-    public void rightClick(PlayerInteractEvent ev) {
+    public void itemInteract(PlayerInteractEvent ev) {
         ev.getPlayer().sendMessage("Right Click has been called on Test Item!");
     }
 

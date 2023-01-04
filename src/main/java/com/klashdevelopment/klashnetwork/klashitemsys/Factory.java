@@ -22,14 +22,6 @@ public class Factory {
         }
         stack.addItemFlags(item.getPropertySet().flags);
 
-        System.out.println("Setting up item...");
-        ArrayList<Namespaced> keys = new ArrayList<Namespaced>(meta.getPlaceableKeys());
-        System.out.println("Setting up item... k.l = " + keys.size());
-        keys.add(LazyNamespaced.ofItemSys(item.getPropertySet().id));
-        System.out.println("Setting up item... k.l = " + keys.size());
-        System.out.println("sui | " + item.getPropertySet().id + " | " + LazyNamespaced.ofItemSys(item.getPropertySet().id).getKey() + "+" + LazyNamespaced.ofItemSys(item.getPropertySet().id).getNamespace());
-        meta.setPlaceableKeys(keys);
-
         stack.setItemMeta(meta);
 
         stack = item.modifyBeforeCreation(stack);
