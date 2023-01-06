@@ -42,7 +42,7 @@ public final class KlashItemSys extends JavaPlugin implements Listener {
     }
 
     public static void registerItem(Item item) {
-        getPlugin(KlashItemSys.class).items.add(item);
+        KlashItemSys.getPlugin(KlashItemSys.class).items.add(item);
     }
 
     @EventHandler
