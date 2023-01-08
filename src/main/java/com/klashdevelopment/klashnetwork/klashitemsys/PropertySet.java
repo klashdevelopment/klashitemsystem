@@ -1,14 +1,11 @@
 package com.klashdevelopment.klashnetwork.klashitemsys;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 public class PropertySet {
 
@@ -17,11 +14,11 @@ public class PropertySet {
     public List<String> lore = new ArrayList<String>();
     public Material material = Material.STONE;
     public int defaultAmount = 1;
-    public Enchantment[] enchantments = new Enchantment[] {};
+    public Enchant[] enchantments = new Enchant[] {};
     public ItemFlag[] flags = new ItemFlag[] {ItemFlag.HIDE_ENCHANTS};
     public boolean cancelClickEvent = false;
     public boolean cancelBreakEvent = false;
-    public ItemRecipe recipe = null;
+    public CustomRecipe recipe = null;
     public String id = null;
 
     public FormattedPropertySet format() {
@@ -48,8 +45,8 @@ public class PropertySet {
             propertySet.description = description;
             return this;
         }
-        public Builder setLore(List<String> lore) {
-            propertySet.lore = lore;
+        public Builder setLore(String... lore) {
+            propertySet.lore = Arrays.asList(lore);
             return this;
         }
         public Builder setMaterial(Material material) {
@@ -64,15 +61,15 @@ public class PropertySet {
             propertySet.id = id.replace(" ", "-");
             return this;
         }
-        public Builder setEnchantments(Enchantment[] enchantments) {
+        public Builder setEnchantments(Enchant... enchantments) {
             propertySet.enchantments = enchantments;
             return this;
         }
-        public Builder setRecipe(ItemRecipe recipe) {
+        public Builder setRecipe(CustomRecipe recipe) {
             propertySet.recipe = recipe;
             return this;
         }
-        public Builder setFlags(ItemFlag[] flags) {
+        public Builder setFlags(ItemFlag... flags) {
             propertySet.flags = flags;
             return this;
         }

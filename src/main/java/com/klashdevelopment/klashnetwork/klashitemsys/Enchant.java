@@ -1,11 +1,11 @@
 package com.klashdevelopment.klashnetwork.klashitemsys;
 
-public record Enchantment(org.bukkit.enchantments.Enchantment enchantment, int level) {
+public record Enchant(org.bukkit.enchantments.Enchantment enchantment, int level) {
 
     public String name() {
         return enchantment().getKey().getKey();
     }
-    public String format() { return name() + " " + levelornumeral(); }
+    public String format() { return name().substring(0, 1).toUpperCase() + name().substring(1) + " " + levelornumeral(); }
     public String levelornumeral() {
         String rslt = String.valueOf(level());
         if(rslt.equals("0")) {

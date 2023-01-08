@@ -2,27 +2,16 @@ package com.klashdevelopment.klashnetwork.klashitemsys;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
 
 public class Stack {
-    public static Stack air = Stack.from(Material.AIR);
-    public static class mat extends Stack {
-        public Material matr;
-        public mat(Material matr) {
-            this.matr = matr;
-        }
-    }
-    public static class ite extends Stack {
-        public ItemStack matr;
-        public ite(ItemStack matr) {
-            this.matr = matr;
-        }
-    }
+    public static RecipeChoice air = Stack.from(Material.AIR);
 
-    public static Stack from(ItemStack stack) {
-        return new ite(stack);
+    public static RecipeChoice from(ItemStack stack) {
+        return new RecipeChoice.ExactChoice(stack);
     }
-    public static Stack from(Material stack) {
-        return new mat(stack);
+    public static RecipeChoice from(Material stack) {
+        return new RecipeChoice.MaterialChoice(stack);
     }
 
 }

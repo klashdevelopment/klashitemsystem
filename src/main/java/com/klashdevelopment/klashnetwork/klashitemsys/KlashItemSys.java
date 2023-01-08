@@ -41,8 +41,11 @@ public final class KlashItemSys extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
     }
 
+    public static KlashItemSys getItemSystem() {
+        return JavaPlugin.getPlugin(KlashItemSys.class);
+    }
     public static void registerItem(Item item) {
-        KlashItemSys.getPlugin(KlashItemSys.class).items.add(item);
+        KlashItemSys.getItemSystem().items.add(item);
     }
 
     @EventHandler

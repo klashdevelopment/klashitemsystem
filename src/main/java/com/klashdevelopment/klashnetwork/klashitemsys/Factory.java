@@ -1,13 +1,11 @@
 package com.klashdevelopment.klashnetwork.klashitemsys;
 
-import com.destroystokyo.paper.Namespaced;
 import net.kyori.adventure.text.Component;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Factory {
     public static ItemStack createItem(Item item) {
@@ -17,7 +15,7 @@ public class Factory {
         meta.displayName(Component.text(item.getPropertySet().name));
         meta.lore(presetLore(item.getPropertySet()));
 
-        for(Enchantment enchantment : item.getPropertySet().enchantments) {
+        for(Enchant enchantment : item.getPropertySet().enchantments) {
             meta.addEnchant(enchantment.enchantment(), enchantment.level(), true);
         }
         stack.addItemFlags(item.getPropertySet().flags);

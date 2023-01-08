@@ -17,7 +17,7 @@ public class FormattedPropertySet extends PropertySet {
         this.defaultAmount = ps.defaultAmount;
         this.flags = ps.flags;
         this.recipe = ps.recipe;
-        this.id = ps.id;
+        this.id = (ps.id == null ? ChatColor.stripColor(ps.name).toLowerCase().replace(" ", "_") : ps.id);
         this.cancelClickEvent = ps.cancelClickEvent;
         this.cancelBreakEvent = ps.cancelBreakEvent;
     }
@@ -40,11 +40,11 @@ public class FormattedPropertySet extends PropertySet {
         List<String> befores = new ArrayList<>();
         List<String> afters = new ArrayList<>();
 
-        befores.add("&r" + description);
+        befores.add(ChatColor.translateAlternateColorCodes('&', "&r" + description));
         if(enchantments.length > 0) {
             befores.add(" ");
         }
-        for(Enchantment enchantment : enchantments) {
+        for(Enchant enchantment : enchantments) {
             befores.add(enchantment.format());
         }
         Ourlore.addAll(befores);
