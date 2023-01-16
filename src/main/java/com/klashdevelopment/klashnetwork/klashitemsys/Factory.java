@@ -1,6 +1,7 @@
 package com.klashdevelopment.klashnetwork.klashitemsys;
 
 import net.kyori.adventure.text.Component;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -18,6 +19,7 @@ public class Factory {
         for(Enchant enchantment : item.getPropertySet().enchantments) {
             meta.addEnchant(enchantment.enchantment(), enchantment.level(), true);
         }
+        stack.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         stack.addItemFlags(item.getPropertySet().flags);
 
         stack.setItemMeta(meta);
