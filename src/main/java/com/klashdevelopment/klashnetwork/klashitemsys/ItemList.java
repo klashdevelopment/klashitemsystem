@@ -1,5 +1,8 @@
 package com.klashdevelopment.klashnetwork.klashitemsys;
 
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentWrapper;
+
 import java.util.ArrayList;
 
 public class ItemList extends ArrayList<Item> {
