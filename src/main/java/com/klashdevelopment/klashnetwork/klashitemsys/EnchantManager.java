@@ -1,6 +1,7 @@
 package com.klashdevelopment.klashnetwork.klashitemsys;
 
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.enchantments.EnchantmentWrapper;
@@ -13,6 +14,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class EnchantManager {
@@ -53,6 +55,26 @@ public class EnchantManager {
                 registeredEnchantments.add(enchantment);
                 KlashItemSys.getItemSystem().getLogger().info("Registered new enchantment: " + enchantment.name);
             }
+        }else {
+            registeredEnchantments.remove(enchantment);
+            try {
+                Field f = Enchantment.class.getField("byKey");
+                Field f2 = Enchantment.class.getField("byName");
+
+                f.setAccessible(true);
+                f2.setAccessible(true);
+
+                Map<NamespacedKey, Enchantment> fV = (Map<NamespacedKey, Enchantment>) f.get(null);
+                Map<String, Enchantment> f2V = (Map<String, Enchantment>) f.get(null);
+
+                fV.remove(enchantment.key());
+                f2V.remove(enchantment.name);
+
+                f.set(null, fV);
+                f2.set(null, f2V);
+            }catch(Exception ignored) {
+            }
+            addEnchant(enchantment);
         }
     }
 }
