@@ -56,25 +56,27 @@ public class EnchantManager {
                 KlashItemSys.getItemSystem().getLogger().info("Registered new enchantment: " + enchantment.name);
             }
         }else {
-            registeredEnchantments.remove(enchantment);
-            try {
-                Field f = Enchantment.class.getField("byKey");
-                Field f2 = Enchantment.class.getField("byName");
 
-                f.setAccessible(true);
-                f2.setAccessible(true);
+        }
+    }
+    public static void removeEnchantment(CustomEnchantment enchantment) {
+        registeredEnchantments.remove(enchantment);
+        try {
+            Field f = Enchantment.class.getField("byKey");
+            Field f2 = Enchantment.class.getField("byName");
 
-                Map<NamespacedKey, Enchantment> fV = (Map<NamespacedKey, Enchantment>) f.get(null);
-                Map<String, Enchantment> f2V = (Map<String, Enchantment>) f.get(null);
+            f.setAccessible(true);
+            f2.setAccessible(true);
 
-                fV.remove(enchantment.key());
-                f2V.remove(enchantment.name);
+            Map<NamespacedKey, Enchantment> fV = (Map<NamespacedKey, Enchantment>) f.get(null);
+            Map<String, Enchantment> f2V = (Map<String, Enchantment>) f.get(null);
 
-                f.set(null, fV);
-                f2.set(null, f2V);
-            }catch(Exception ignored) {
-            }
-            addEnchant(enchantment);
+            fV.remove(enchantment.key());
+            f2V.remove(enchantment.name);
+
+            f.set(null, fV);
+            f2.set(null, f2V);
+        }catch(Exception exc) {
         }
     }
 }
